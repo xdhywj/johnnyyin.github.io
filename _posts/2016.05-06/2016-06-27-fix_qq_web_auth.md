@@ -10,11 +10,12 @@ QQ登录SDK在用户设备没有安装手机QQ客户端的情况下，默认是�
 <!--more-->
 
 ### 分析
-试了下市场上其他app使用QQ登录的情况，发现京东的客户端，在未安装客户端的情况下是可以打开网页授权的，抓包得到京东的授权链接：
->
-[http://openmobile.qq.com/oauth2.0/m_authorize?status_os=5.0.2&client_id=100273020&status_userip=fec0%3A%3A10%3A5530%3Aabe3%3Abbb9%3Ac98e%2516&format=json&switch=1&status_version=21&appid_for_getting_config=100273020&status_machine=x600&pf=openmobile_android&sdkp=a&sdkv=2.4.lite&sign=88d1d495ffc03ae69a9339367172a5bf&time=1467062773&scope=all&redirect_uri=auth%3A%2F%2Ftauth.qq.com%2F&display=mobile&response_type=token&cancel_display=1](http://openmobile.qq.com/oauth2.0/m_authorize?status_os=5.0.2&client_id=100273020&status_userip=fec0%3A%3A10%3A5530%3Aabe3%3Abbb9%3Ac98e%2516&format=json&switch=1&status_version=21&appid_for_getting_config=100273020&status_machine=x600&pf=openmobile_android&sdkp=a&sdkv=2.4.lite&sign=88d1d495ffc03ae69a9339367172a5bf&time=1467062773&scope=all&redirect_uri=auth%3A%2F%2Ftauth.qq.com%2F&display=mobile&response_type=token&cancel_display=1)
+试了下市场上其他app使用QQ登录的情况，发现京东的客户端，在未安装客户端的情况下是可以打开网页授权的，抓包得到京东的授权链接：  
 
-同时在网上找到一个介绍说不用SDK直接打开网页授权的链接：
+>[http://openmobile.qq.com/oauth2.0/m_authorize?status_os=5.0.2&client_id=100273020&status_userip=fec0%3A%3A10%3A5530%3Aabe3%3Abbb9%3Ac98e%2516&format=json&switch=1&status_version=21&appid_for_getting_config=100273020&status_machine=x600&pf=openmobile_android&sdkp=a&sdkv=2.4.lite&sign=88d1d495ffc03ae69a9339367172a5bf&time=1467062773&scope=all&redirect_uri=auth%3A%2F%2Ftauth.qq.com%2F&display=mobile&response_type=token&cancel_display=1](http://openmobile.qq.com/oauth2.0/m_authorize?status_os=5.0.2&client_id=100273020&status_userip=fec0%3A%3A10%3A5530%3Aabe3%3Abbb9%3Ac98e%2516&format=json&switch=1&status_version=21&appid_for_getting_config=100273020&status_machine=x600&pf=openmobile_android&sdkp=a&sdkv=2.4.lite&sign=88d1d495ffc03ae69a9339367172a5bf&time=1467062773&scope=all&redirect_uri=auth%3A%2F%2Ftauth.qq.com%2F&display=mobile&response_type=token&cancel_display=1)
+
+同时在网上找到一个介绍说不用SDK直接打开网页授权的链接：  
+
 >[https://openmobile.qq.com/oauth2.0/m_authorize?status_userip=&scope=add_share,add_topic,list_album,upload_pic,get_simple_userinfo&redirect_uri=auth%3A%2F%2Ftauth.qq.com%2F&response_type=token&client_id=100353810](https://openmobile.qq.com/oauth2.0/m_authorize?status_userip=&scope=add_share,add_topic,list_album,upload_pic,get_simple_userinfo&redirect_uri=auth%3A%2F%2Ftauth.qq.com%2F&response_type=token&client_id=100353810)
 
 这个链接也是能打开授权页的，但是参数比较少。
@@ -36,8 +37,8 @@ V1.6才支持手Q登录，那么之前的sdk应该都是网页授权咯？测试
 ### 解决方案
 通过字符串查找拼接网页授权url的地方，然后通过反射的方式来修改这个网页授权的url就ok了，具体步骤不展开了，代码如下：
 
-```
-    /**
+{% highlight java %}
+/**
      * 解决网页授权问题
      *
      * @return true: 成功; false: 失败
@@ -62,7 +63,6 @@ V1.6才支持手Q登录，那么之前的sdk应该都是网页授权咯？测试
         }
         return ok;
     }
-
     /**
      * 解决网页授权问题的AuthAgent
      */
@@ -82,7 +82,7 @@ V1.6才支持手Q登录，那么之前的sdk应该都是网页授权咯？测试
             return bundle;
         }
     }
-```
+{% endhighlight java %}
 
 ### 参考：
 - [http://blog.csdn.net/cc191954/article/details/9145319](http://blog.csdn.net/cc191954/article/details/9145319)
