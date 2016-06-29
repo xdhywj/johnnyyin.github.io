@@ -39,3 +39,6 @@ HOST: http://yinzhong.me
 excerpt_separator: <!--more-->
 
 gems: [jekyll-paginate]
+
+# 解决当天博客无法显示的问题
+future: true
