@@ -3,8 +3,12 @@ permalink: /:year/:month/:day/:title.html
 paginate: 10 # pagination based on number of posts
 paginate_path: "page:num"
 exclude: ["README.md"] # files to exclude
-highlighter: pygments
+highlighter: rouge
+encoding: "utf-8"
 markdown: kramdown
+
+# 解决当天博客无法显示的问题, 参考：https://jekyllrb.com/docs/configuration/
+future: true
 
 defaults:
   -
@@ -40,5 +44,27 @@ excerpt_separator: <!--more-->
 
 gems: [jekyll-paginate]
 
-# 解决当天博客无法显示的问题
-future: true
+# MarkDown解释器kramdown配置
+kramdown:
+  input: GFM
+  extensions:
+    - autolink
+    - footnotes
+    - smart
+
+  auto_ids:       true
+  footnote_nr:    1
+  entity_output:  as_char
+  toc_levels:     1..6
+  smart_quotes:   lsquo,rsquo,ldquo,rdquo
+  enable_coderay: false
+  fenced_code_blocks: true
+  syntax_highlighter: rouge
+
+  coderay:
+    coderay_wrap:              div
+    coderay_line_numbers:      inline
+    coderay_line_number_start: 1
+    coderay_tab_width:         4
+    coderay_bold_every:        10
+    coderay_css:               style

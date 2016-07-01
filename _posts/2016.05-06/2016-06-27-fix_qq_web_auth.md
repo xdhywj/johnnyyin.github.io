@@ -37,7 +37,7 @@ V1.6才支持手Q登录，那么之前的sdk应该都是网页授权咯？测试
 ### 解决方案
 通过字符串查找拼接网页授权url的地方，然后通过反射的方式来修改这个网页授权的url就ok了，具体步骤不展开了，代码如下：
 
-{% highlight java %}
+```java
 /**
      * 解决网页授权问题
      *
@@ -82,7 +82,7 @@ V1.6才支持手Q登录，那么之前的sdk应该都是网页授权咯？测试
             return bundle;
         }
     }
-{% endhighlight java %}
+```
 
 ### 参考：
 - [http://blog.csdn.net/cc191954/article/details/9145319](http://blog.csdn.net/cc191954/article/details/9145319)
