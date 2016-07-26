@@ -15,7 +15,7 @@ tags: [Android]
 [https://android.googlesource.com/platform/tools/base/+/gradle_2.0.0/build-system/](https://android.googlesource.com/platform/tools/base/+/gradle_2.0.0/build-system/) 其中`gradle_2.0.0`是分支名，可以按照最新的分支来修改。
 
 经过一段艰苦的grep源码之后，可以看到插件中取aapt的方式都是
-![]({{ site.BASE_PATH }}/assets/ico/p1.png)
+![]({{ site.baseurl }}/assets/icon/p1.png)
 
 重点在这：
 
