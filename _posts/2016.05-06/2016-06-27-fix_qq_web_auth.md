@@ -37,8 +37,9 @@ V1.6才支持手Q登录，那么之前的sdk应该都是网页授权咯？测试
 ### 解决方案
 通过字符串查找拼接网页授权url的地方，然后通过反射的方式来修改这个网页授权的url就ok了，具体步骤不展开了，代码如下：
 
+以下方案是基于[3.1.0lite](http://qzonestyle.gtimg.cn/qzone/vas/opensns/res/doc/Android_SDK_V3.1.0_lite.zip)
 ```java
-/**
+    /**
      * 解决网页授权问题
      *
      * @return true: 成功; false: 失败
@@ -83,6 +84,57 @@ V1.6才支持手Q登录，那么之前的sdk应该都是网页授权咯？测试
         }
     }
 ```
+
+以下方案是基于2.9.4lite：
+```java
+    /**
+     * 解决网页授权问题
+     *
+     * @return true: 成功; false: 失败
+     */
+    private boolean fixWebAuth(Context context, Tencent tencent) {
+        if (AppUtils.isAppInstalled(context.getApplicationContext(), "com.tencent.mobileqq")) {
+            return true;
+        }
+        if (tencent == null) {
+            return false;
+        }
+        boolean ok = false;
+        try {
+            Field aField = tencent.getClass().getDeclaredField("mQQAuth");
+            aField.setAccessible(true);
+            Object cVal = aField.get(tencent);
+            Field authAgentField = cVal.getClass().getDeclaredField("a");
+            authAgentField.setAccessible(true);
+            authAgentField.set(cVal, new FixWebAuthAgent(tencent.getQQToken()));
+            ok = true;
+        } catch (Throwable ignore) {
+        }
+        return ok;
+    }
+
+    /**
+     * 解决网页授权问题的AuthAgent
+     */
+    private static class FixWebAuthAgent extends AuthAgent {
+
+        FixWebAuthAgent(QQToken qqToken) {
+            super(qqToken);
+        }
+
+        @Override
+        protected Bundle composeCGIParams() {
+            Bundle bundle = super.composeCGIParams();
+            if (bundle != null) {
+                // 主要原因在这, 腾讯的server估计是判断这个版本号来进行限制登录的, 从1.5版本后不能打开网页授权了
+                bundle.putString("sdkv", "1.4.0");
+            }
+            return bundle;
+        }
+    }
+```
+
+`其他的sdk版本请自测。`
 
 ### 参考：
 - [http://blog.csdn.net/cc191954/article/details/9145319](http://blog.csdn.net/cc191954/article/details/9145319)
