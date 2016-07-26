@@ -37,7 +37,8 @@ V1.6才支持手Q登录，那么之前的sdk应该都是网页授权咯？测试
 ### 解决方案
 通过字符串查找拼接网页授权url的地方，然后通过反射的方式来修改这个网页授权的url就ok了，具体步骤不展开了，代码如下：
 
-以下方案是基于[3.1.0lite](http://qzonestyle.gtimg.cn/qzone/vas/opensns/res/doc/Android_SDK_V3.1.0_lite.zip)
+以下方案是基于[3.1.0lite](http://qzonestyle.gtimg.cn/qzone/vas/opensns/res/doc/Android_SDK_V3.1.0_lite.zip)  
+
 ```java
     /**
      * 解决网页授权问题
@@ -85,7 +86,8 @@ V1.6才支持手Q登录，那么之前的sdk应该都是网页授权咯？测试
     }
 ```
 
-以下方案是基于2.9.4lite：
+以下方案是基于2.9.4lite：  
+
 ```java
     /**
      * 解决网页授权问题
