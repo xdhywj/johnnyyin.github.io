@@ -39,6 +39,7 @@ tags_path: tags.html
 
 BASE_PATH: 
 HOST: http://yinzhong.me
+baseurl:
 
 excerpt_separator: <!--more-->
 
