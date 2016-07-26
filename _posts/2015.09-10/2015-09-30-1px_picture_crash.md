@@ -5,7 +5,7 @@ date: 2015-09-30 12:29:19
 categories: [Android]
 tags: [Crash]
 ---
-###问题描述
+### 问题描述
 最近在项目中遇到一个奇葩的Crash，在创建bitmap时Crash，log如下：
 {% highlight java %}
 java.lang.IllegalArgumentException: width and height must be > 0
@@ -27,7 +27,7 @@ java.lang.IllegalArgumentException: width and height must be > 0
 <!--more-->
 一开始以为是OOM导致的Bitmap创建失败，后来查看了下当前的内存状态，并非OOM导致的，同时发现Crash全部分布在API <= 19的设备中。于是看了下源码，发现是因为资源图片导致的。
 
-###问题原因  
+### 问题原因  
 
 ##### 首先看Crash代码  
 [http://androidxref.com/4.0.4/xref/frameworks/base/graphics/java/android/graphics/Bitmap.java#601](http://androidxref.com/4.0.4/xref/frameworks/base/graphics/java/android/graphics/Bitmap.java#601)  
@@ -52,6 +52,6 @@ int width = (int) (1 * 120 / 320.0f + 0.5f) = 0;
 
 以上只是api<=19的情况，在api19及以上，createBitmap以及缩放的代码全部放在了native中进行，但是当遇到上面的case时，虽然不会crash，但是得到的bitmap size为0，在绘制的时候显示为一片黑色。
 
-###解决方式
+### 解决方式
 很简单，不使用1px的图片就行，同理，不仅在xhdpi中会出问题，在xxhdpi中也会出问题，只要上面的计算得到0都会crash.
 因此有条简单的规则就是xhpdi和xxhdpi下都不能使用<=1px的图片，xxxhdpi下不能使用<=2px的图片。
