@@ -15,30 +15,29 @@ defaults:
     scope:
       path: "" # empty string for all files
     values:
-      title: JohnnyYin的博客
+      title: xdhywj的博客
 
-description: JohnnyYin的博客，专注移动互联网开发，开源爱好者。
+description: xdhywj的博客，专注移动互联网开发，开源爱好者。
 # gavatar头像及favicon
 gavatar: /assets/ico/avatar.jpg
 favicon: /assets/ico/avatar.jpg
 
 author:
-  name: JohnnyYin
-  bio: JohnnyYin
-  github: JohnnyYin
-  weibo: 729271608
-  wechat: enjoy_dream
-  csdn: yinzhong39
-  qq: 729271608
-  email: enjoy930429@gmail.com
-  email_md5: daf837849a895608386061ebedcd389b
+  name: WangJian
+  bio: WangJian
+  github: xdhywj
+  weibo:
+  wechat: xdhywj
+  csdn: xdhywj
+  qq: 982475227
+  email: 982475227@qq.com
 
 rss_path: feed.xml
 categories_path: categories.html
 tags_path: tags.html
 
-BASE_PATH: 
-HOST: http://yinzhong.me
+BASE_PATH:
+HOST: http://xdhywj.github.io
 baseurl:
 
 excerpt_separator: <!--more-->
